@@ -1,0 +1,44 @@
+<fieldset>
+    <h1>Hangman: Wordle Edition</h1>
+</fieldset>
+<br>
+<fieldset>
+    <h1>Game Settings</h1>
+    <form action="/settings" method="post">
+        <input type="checkbox" id="" name="settingShowCorrectLetters" value="" {{'checked="checked"' if settingShowCorrectLetters else ""}}>Show Correct Letters
+        <br>
+        <p>   Of the words you've guessed, this will display the letters which are in the correct positions</p4>
+        <br>
+        <br>
+        <input type="checkbox" id="" name="settingShowContainedLetters" value="" {{'checked="checked"' if settingShowContainedLetters else ""}}>Show Contained Letters
+        <br>
+        <p>   Of the words you've guessed, this will display the letters which are in the word somewhere</p4>
+        <br>
+        <br>
+        <input type="checkbox" id="" name="settingPreventInvalidWords" value="" {{'checked="checked"' if settingPreventInvalidWords else ""}}>Prevent Invalid Words
+        <br>
+        <p>   Won't count invalid words (too short, too long, not a word) as a guess</p4>
+        <br>
+        <br>
+        <input type="checkbox" id="" name="settingPreventUsedLetters" value="" {{'checked="checked"' if settingPreventUsedLetters else ""}}> Prevent Used Letters
+        <br>
+        <p>   Prevents you from attempting to use a letter for a second time that is known not to be in the word</p4>
+        <br>
+        <br>
+        <input type="checkbox" id="" name="" value="settingUseTimeLimit" {{'checked="checked"' if settingUseTimeLimit else ""}}>Use Time Limit
+        <br>
+        <p>   Makes it so that you only have a set amount of time to guess each word</p4>
+        <br>
+        <br>
+        <button type="submit">Save Settings</button>
+    </form>
+
+    <form action="/restoreDefaultSettings" method="post"></form>
+        <button type="submit">Restore Default Settings</button>
+    </form>
+    <br>
+    <br>
+    <form action="/" method="post">
+        <button type="submit">Back</button>
+    </form>
+</fieldset>

@@ -1,0 +1,20 @@
+<fieldset>
+    <h1>Hangman: Wordle Edition</h1>
+</fieldset>
+<br>
+<fieldset>
+    Congrats, You Won!
+    <br>
+    Words Guessed: {{wordsGuessed}}
+    <p>
+        <form action="/play" method="post">
+            <button type="submit">New Game</button>
+        </form>
+        <form action="/rules" method="post">
+            <button type="submit">View Rules</button>
+        </form>
+        <form action="/settings" method="post">
+            <button type="submit">Settings</button>
+        </form>
+    </p>
+</fieldset>

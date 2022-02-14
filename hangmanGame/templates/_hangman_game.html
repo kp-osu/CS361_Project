@@ -1,0 +1,33 @@
+<fieldset>
+    <h1>Hangman: Wordle Edition</h1>
+</fieldset>
+<br>
+<fieldset>
+    <p>
+        Round {{roundNumber}}: {{lettersInWord}}-Letter-Word | Guesses Remaining: {{guessesRemaining}}/{{guessesThisRound}}
+        <br>
+        Time Remaining: ...
+        <br>
+        <br>
+        {{currentProgress}}
+        <form action="/play" method="post">
+            <input type="text" id="userGuess" name="userGuess"> {% if lastGuess != "" %} "{{lastGuess}}" {{errorMessage}}{% endif %} 
+            <br>
+            <br>
+            <button type="submit">Submit Guess!</button>
+        </form>
+        Attempts:
+        <ul>
+            {% for thing in incorrectGuesses %}
+              <li>{{ thing }}</li>
+            {% endfor %}  
+        </ul>
+
+        <br>
+        DEBUG: CURRENT WORD: {{debug_currentWord}}
+    </p>
+
+    <form action="/" method="post">
+        <button type="submit">Quit Game</button>
+    </form>
+</fieldset>
