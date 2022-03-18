@@ -10,6 +10,7 @@ import os.path
 import random
 import time
 import hangmanGUI
+import math
 
 
 # --------------------------------------------------------------------------------------------
@@ -95,11 +96,19 @@ class Game:
 
     # return number of guesses remaining
     def getGuessesRemaining(self):
-        return self.guessesPerRound[self.round] - self.guessesUsed
+        return self.getGuessesThisRound() - self.guessesUsed
 
     # return total number of guesses allowed in the current round
     def getGuessesThisRound(self):
-        return self.guessesPerRound[self.round]
+        difficultyGuessModifier = 1
+
+        if self.difficulty != None:
+            if self.difficulty == "Easy":
+                difficultyGuessModifier = 2
+            elif self.difficulty == "Hard":
+                difficultyGuessModifier = 0.5
+
+        return math.floor(self.guessesPerRound[self.round] * difficultyGuessModifier)
 
     # get incorrect guesses so far
     def getIncorrectGuesses(self):
@@ -173,7 +182,8 @@ class Game:
             return ""
 
     # method to start a new game round
-    def pickWordsForNextRound(self):
+    def pickWordsForNextRound(self, difficultyString):
+        self.difficulty = difficultyString
         self.currentWord = self.parseAndGetWordsForNextRound()
         print("Chosen word for next round is: " + self.currentWord)
         self.lastWord = self.currentWord
@@ -195,7 +205,7 @@ class Game:
             self.guessesUsed = 0
             self.incorrectGuesses = []
             self.guessesThisRound = self.getGuessesThisRound()
-            self.pickWordsForNextRound()
+            self.pickWordsForNextRound(self.difficulty)
 
     # on incorrect guess
     def gameEvent_onIncorrectGuess(self, userGuessString, gameWindow):
@@ -209,11 +219,13 @@ class Game:
     def gameEvent_onWinGameComplete(self, gameWindow):
         self.gameWon = True
         gameWindow.displayHomeScreen()
+        self.resetGameState()
 
     # on fail state - game over
     def gameEvent_onLose(self, gameWindow):
         self.gameLost = True
         gameWindow.displayHomeScreen()
+        self.resetGameState()
 
 
 # Create game instance and start first round
